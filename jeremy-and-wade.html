@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jeremy & Wade — I Pescatori della Leggenda</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--water:#1a3a5c;--water-light:#2a5f8f;--gold:#c9943a;--cream:#fdf6e3;--text:#1e2d3d;--muted:#6b7f93;--card-bg:#ffffff;--wave-bg:#eef6fb}
+    @media(prefers-color-scheme:dark){:root{--cream:#0d1f33;--card-bg:#132436;--text:#e8f0f8;--muted:#8aa0b8;--wave-bg:#0f2030}}
+    html{scroll-behavior:smooth}
+    body{font-family:Georgia,'Times New Roman',serif;background:var(--cream);color:var(--text);line-height:1.8;overflow-x:hidden}
+    .hero{background:linear-gradient(180deg,#060e18 0%,#0d2035 40%,#1a3a5c 80%,#1e5080 100%);min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem 1.5rem 6rem;position:relative;overflow:hidden}
+    .hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:90px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 90'%3E%3Cpath d='M0 45 Q200 0 400 45 Q600 90 800 45 Q1000 0 1200 45 L1200 90 L0 90 Z' fill='%23fdf6e3'/%3E%3C/svg%3E") center bottom/cover no-repeat}
+    @media(prefers-color-scheme:dark){.hero::after{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 90'%3E%3Cpath d='M0 45 Q200 0 400 45 Q600 90 800 45 Q1000 0 1200 45 L1200 90 L0 90 Z' fill='%230d1f33'/%3E%3C/svg%3E") center bottom/cover no-repeat}}
+    #stars{position:absolute;inset:0;pointer-events:none}
+    .star{position:absolute;background:white;border-radius:50%;animation:twinkle 3s infinite alternate}
+    @keyframes twinkle{0%{opacity:.15}100%{opacity:.9}}
+    .ripple{position:absolute;bottom:80px;width:300px;height:300px;border:1px solid rgba(255,255,255,.06);border-radius:50%;animation:expandRipple 6s ease-out infinite}
+    .ripple:nth-child(2){animation-delay:2s}.ripple:nth-child(3){animation-delay:4s}
+    @keyframes expandRipple{0%{transform:scale(.5);opacity:.4}100%{transform:scale(3);opacity:0}}
+    .hero-badge{background:rgba(201,148,58,.18);border:1px solid rgba(201,148,58,.45);color:#f0c870;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;padding:.4rem 1.4rem;border-radius:999px;margin-bottom:1.8rem;display:inline-block;font-family:Arial,sans-serif}
+    .hero h1{font-size:clamp(3rem,9vw,6rem);font-weight:700;color:#fff;line-height:1.05;text-shadow:0 4px 30px rgba(0,0,0,.6);margin-bottom:.4rem}
+    .hero h1 span{color:#f0c870}
+    .hero-sub{font-size:clamp(1rem,2.5vw,1.25rem);color:rgba(255,255,255,.6);font-style:italic;max-width:520px;margin:0 auto 3rem}
+    .hero-scroll{position:absolute;bottom:105px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(255,255,255,.3);font-size:.7rem;letter-spacing:.15em;font-family:Arial,sans-serif;animation:bobble 2s ease-in-out infinite}
+    @keyframes bobble{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+    .hero-scroll-arrow{width:18px;height:18px;border-right:1.5px solid rgba(255,255,255,.3);border-bottom:1.5px solid rgba(255,255,255,.3);transform:rotate(45deg)}
+    .section{max-width:820px;margin:0 auto;padding:5rem 1.5rem}
+    .label{font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-family:Arial,sans-serif;margin-bottom:.6rem}
+    .section h2{font-size:clamp(1.7rem,4vw,2.5rem);color:var(--water);line-height:1.2;margin-bottom:1.5rem}
+    @media(prefers-color-scheme:dark){.section h2{color:#7ab8e8}}
+    p{margin-bottom:1.1rem}p:last-child{margin-bottom:0}
+    .saint-section{background:var(--wave-bg);padding:5rem 1.5rem}
+    .saint-inner{max-width:820px;margin:0 auto;display:grid;grid-template-columns:280px 1fr;gap:3rem;align-items:start}
+    @media(max-width:650px){.saint-inner{grid-template-columns:1fr}}
+    .saint-frame{position:relative;text-align:center}
+    .saint-frame img{width:100%;max-width:280px;border-radius:8px;display:block;margin:0 auto;box-shadow:0 12px 40px rgba(0,0,0,.25),0 0 0 4px rgba(201,148,58,.3)}
+    .saint-caption{margin-top:.9rem;font-size:.78rem;color:var(--muted);font-style:italic;line-height:1.5}
+    .prayer-box{background:var(--card-bg);border:1px solid rgba(201,148,58,.25);border-left:3px solid var(--gold);border-radius:8px;padding:1.4rem 1.6rem;margin-top:1.5rem;font-style:italic;font-size:.92rem;color:var(--muted);line-height:1.7}
+    .timeline{position:relative;margin-top:2.5rem;padding-left:2rem}
+    .timeline::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--water-light),var(--gold));border-radius:2px}
+    .tl-item{position:relative;margin-bottom:2.8rem}
+    .tl-item:last-child{margin-bottom:0}
+    .tl-dot{position:absolute;left:-2.45rem;top:5px;width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid var(--cream);box-shadow:0 0 0 2px var(--gold)}
+    .tl-year{font-size:.68rem;letter-spacing:.2em;color:var(--gold);font-family:Arial,sans-serif;text-transform:uppercase;margin-bottom:.3rem}
+    .tl-item h3{font-size:1.05rem;color:var(--water);margin-bottom:.5rem}
+    @media(prefers-color-scheme:dark){.tl-item h3{color:#7ab8e8}}
+    .tl-item p{font-size:.92rem;color:var(--text);margin-bottom:0}
+    .stats-bar{background:linear-gradient(135deg,#0d2035 0%,#1a3a5c 60%,#1e5080 100%);padding:4rem 1.5rem}
+    .stats-inner{max-width:820px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;text-align:center}
+    @media(max-width:580px){.stats-inner{grid-template-columns:repeat(2,1fr)}}
+    .stat-num{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;color:#f0c870;display:block;line-height:1}
+    .stat-lbl{font-size:.72rem;color:rgba(255,255,255,.5);font-family:Arial,sans-serif;letter-spacing:.08em;margin-top:.4rem;line-height:1.4}
+    .species-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.9rem;margin-top:2rem}
+    .species-card{background:var(--card-bg);border:1px solid rgba(42,95,143,.15);border-radius:10px;padding:1.1rem .9rem;text-align:center}
+    .species-icon{font-size:1.8rem;display:block;margin-bottom:.4rem}
+    .species-card .name{font-size:.82rem;font-weight:600;color:var(--water);font-family:Arial,sans-serif;display:block}
+    @media(prefers-color-scheme:dark){.species-card .name{color:#7ab8e8}}
+    .species-card .latin{font-size:.72rem;color:var(--muted);font-style:italic;display:block;margin-top:.2rem}
+    .quote-section{background:var(--wave-bg);padding:5rem 1.5rem;text-align:center}
+    .quote-inner{max-width:620px;margin:0 auto}
+    .big-quote{font-size:clamp(1.25rem,3vw,1.75rem);font-style:italic;line-height:1.55;margin-bottom:1.2rem;color:var(--text)}
+    .big-quote::before{content:'\201C';color:var(--gold)}.big-quote::after{content:'\201D';color:var(--gold)}
+    .quote-attr{font-size:.82rem;color:var(--muted);font-family:Arial,sans-serif;letter-spacing:.08em}
+    .divider{display:flex;align-items:center;gap:1rem;margin:3rem 0;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);font-family:Arial,sans-serif}
+    .divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(42,95,143,.18)}
+    footer{background:#070f1a;color:rgba(255,255,255,.4);text-align:center;padding:3.5rem 1.5rem;font-family:Arial,sans-serif;font-size:.8rem}
+    footer .logo{font-family:Georgia,serif;font-size:1.4rem;color:rgba(255,255,255,.8);margin-bottom:.5rem}
+    footer .logo span{color:#f0c870}
+    footer p{margin-bottom:.3rem}
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div id="stars"></div>
+  <div class="ripple"></div><div class="ripple"></div><div class="ripple"></div>
+  <div class="hero-badge">Cronache Ittiche &middot; Dal 2010 circa</div>
+  <h1>Jeremy <span>&amp;</span> Wade</h1>
+  <p class="hero-sub">Due ragazzi, una riva, mille ore d&rsquo;acqua dolce &mdash; e qualcosa che finalmente abbocca</p>
+  <div class="hero-scroll"><span>Scorri</span><div class="hero-scroll-arrow"></div></div>
+</section>
+
+<section class="saint-section">
+  <div class="saint-inner">
+    <div class="saint-frame">
+      <img src="img.png" alt="Il Santino di St. Jeremy Wade" />
+      <p class="saint-caption"><strong>St. Jeremy Wade</strong><br>Patrono dei pescatori ostinati, protettore delle canne vuote e degli ami disertati. Raffigurato con il rotolo sacro degli <em>aircons</em> &mdash; le preghiere mai ascoltate dai pesci.</p>
+      <div class="prayer-box">O Santo Jeremy Wade, tu che hai gettato la lenza in acque che non ti volevano bene, guarda dalass&ugrave; questi tuoi figli. Fa&rsquo; che il luccio abbocchi, che il siluro venga a galla, che il bass si fidi. E se anche oggi torneranno a mani vuote &mdash; fa&rsquo; almeno che tornino felici.<br><br><em>Amen.</em></div>
+    </div>
+    <div>
+      <p class="label">Il Culto</p>
+      <h2 style="font-size:clamp(1.5rem,3vw,2rem);margin-bottom:1rem;">Come nasce un santo della pesca</h2>
+      <p>Non si sa esattamente quando Jeremy e Wade abbiano smesso di essere semplicemente due amici con le canne e siano diventati una leggenda. Probabilmente &egrave; successo una mattina d&rsquo;autunno, sulla riva di un fiume che nessun pesce degna di un nome, quando qualcuno li ha visti arrivare alle cinque e mezza con i thermos del caff&egrave;, le luci frontali accese nel buio e la stessa espressione serena di chi non teme il fallimento perch&eacute; ci ha gi&agrave; fatto l&rsquo;abitudine.</p>
+      <p>Da quel giorno qualcuno ha cominciato a fare il segno della croce al loro passaggio. Nel senso buono.</p>
+      <p>Il santino &egrave; comparso misteriosamente in una cappelletta vicino al laghetto. Nessuno sa chi l&rsquo;abbia messo l&igrave;. Jeremy giura di no. Wade dice che era gi&agrave; l&igrave; quando sono arrivati. I pesci non commentano.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <p class="label">La Storia Vera</p>
+  <h2>Dalle rive dell&rsquo;infanzia alle acque dei predatori</h2>
+  <p>Erano ragazzini &mdash; dodici, tredici anni &mdash; quando hanno gettato la prima lenza. Non una lenza vera, a dirla tutta: uno spago legato a un ramoscello, un amo da due lire comprato al mercato, qualche lombrico recuperato dopo la pioggia nel giardino di casa. La riva era quella di un fossatello di campagna che sulla cartina non aveva nemmeno un nome, ma per loro era l&rsquo;Amazzonia, era l&rsquo;Oceano, era tutto.</p>
+  <p>I pesci, gi&agrave; allora, avevano capito con chi avevano a che fare. Stavano alla larga con educazione.</p>
+  <p>Ma Jeremy e Wade non erano il tipo da mollare. Settimana dopo settimana, estate dopo estate, tornavano. Cambiavano esca, cambiavano posto, cambiavano l&rsquo;angolo della canna. Leggevano forum su forum, guardavano video di pescatori con cappelli da esploratore e barbe da vichingo. Imparavano termini nuovi, compravano moschettoni, giravelli, ami offset. Continuavano a tornare a mani vuote, ma tornavano con qualcosa che non si misura in chili: la calma. La capacit&agrave; di stare fermi. Il silenzio condiviso tra due persone che non hanno bisogno di parlare per capirsi.</p>
+  <div class="divider">La Svolta</div>
+  <p>Poi, circa un anno fa, &egrave; successa una cosa. Qualcuno &mdash; un vecchio del paese, un tipo conosciuto online, forse lo stesso vento &mdash; li ha indirizzati verso un mondo diverso: la pesca ai predatori di acqua dolce. Lucci. Siluri. Aspi. Trote. Bass. Persici reali. Nomi che suonano seri, animali che non perdonano gli errori, tecniche che richiedono studio vero.</p>
+  <p>Jeremy ci si &egrave; buttato come fa sempre: con metodologia totale. Ha riempito un quaderno di appunti sulle abitudini del luccio, ha studiato le mappe batimetriche dei laghi, ha ordinato jig e swimbait da cataloghi specializzati come se stesse allestendo una spedizione scientifica. Wade, dal canto suo, ha annuito a tutto e ha comprato una canna spinning che ha accarezzato per tre giorni prima di usarla.</p>
+  <p>La prima uscita seria &egrave; stata al lago. Freddo, alba, nebbia bassa sull&rsquo;acqua. Hanno lanciato per cinque ore. Non &egrave; successo niente di concreto in termini ittici, ma qualcosa &egrave; cambiato nell&rsquo;aria: si percepiva che questa non era pi&ugrave; pesca per caso. Era ricerca. Era predazione consapevole contro predatori consapevoli. Un duello ad armi pari &mdash; anzi, con leggero vantaggio del pesce, come sempre.</p>
+  <div class="divider">Le Uscite Leggendarie</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Infanzia &middot; 2010 circa</div><h3>Il Fossatello Senza Nome</h3><p>Prima esca, primo lancio, primo silenzio dall&rsquo;acqua. Un pomeriggio di luglio su una sponda di fango, spago in mano, sguardo fisso sulla superficie immobile. Nessun pesce. Ma anche nessun posto al mondo in cui avrebbero preferito essere.</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Anni di formazione &middot; 2012&ndash;2022</div><h3>Il Lungo Apprendistato</h3><p>Dieci anni di uscite regolari, di ami cambiati, di esche provate, di orari sperimentati. Hanno pescato all&rsquo;alba e al tramonto, sotto la pioggia e nel caldo di agosto. Hanno imparato tutto sulla pesca &mdash; tranne come far abboccare i pesci. Ma hanno imparato qualcosa di pi&ugrave; raro: la pazienza totale, la fedelt&agrave; a un&rsquo;idea anche quando l&rsquo;idea non risponde.</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Autunno 2023</div><h3>L&rsquo;Incontro con i Predatori</h3><p>Qualcuno mostra loro un video di pesca al luccio con artificiali. Jeremy guarda il pesce che attacca il lure con violenza pura e dice solo: &laquo;Ecco&raquo;. Wade dice: &laquo;Quando si va?&raquo;. Inizia una nuova era. Comprano spinning, mulinelli, fluorocarbon, trecciati. Studiano come mai prima. Il pesce, per ora, ancora non lo sanno, ma sta per diventare una questione personale.</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Inverno 2023</div><h3>La Prima Uscita al Freddo</h3><p>Quattro gradi, nebbia spessa, guanti da sci improvvisati. Lanciano jig nel canale per tre ore. Un tocco. Uno solo. Jeremy giura di aver sentito qualcosa. Wade giura di averlo visto lui anche. Probabilmente era un ramoscello sott&rsquo;acqua, ma quella sera lo raccontano come se avessero sfiorato il Sacro Graal.</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Primavera 2024</div><h3>Il Lago dei Lucci</h3><p>Prima uscita in un lago conosciuto per i lucci. Si preparano per giorni: cercano i fondali, scelgono i punti, selezionano i lure. All&rsquo;alba sono gi&agrave; in postazione. Il lago &egrave; bellissimo, immobile, dorato di luce radente. Lanciano per sette ore. Un luccio emerge a dieci metri da Jeremy, guarda il lure, lo annusa quasi, poi vira lentamente e scompare. &Egrave; il massimo avvicinamento registrato nella storia di Jeremy &amp; Wade. Viene commemorato ogni anno.</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Estate 2024</div><h3>La Caccia all&rsquo;Asp</h3><p>L&rsquo;asp &egrave; un predatore di superficie che caccia in branco, veloce e nervoso. Wade ne vede uno schizzare fuori dall&rsquo;acqua a cinquanta metri. Lancia immediatamente. L&rsquo;asp lo ignora con la stessa eleganza con cui un gatto ignora chi lo chiama. Lanciano per due ore sul branco di aspi visibili a occhio nudo. Zero strike. Una performance artistica nell&rsquo;arte dell&rsquo;ignoranza ittica.</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Autunno 2024</div><h3>Il Siluro di Mezzanotte</h3><p>Escursione notturna in un fiume noto per i siluri. Deadbait sul fondo, canna sul trespolo, aspettano nel buio con le frontali. Alle due di notte la canna si piega &mdash; per un secondo. Poi niente. Jeremy non dorme fino all&rsquo;alba. Ancora oggi, quando si parla di siluri, abbassa la voce come se il pesce potesse sentire.</p></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2025 &middot; In corso</div><h3>L&rsquo;Anno della Trota e del Bass</h3><p>Nuovi obiettivi, nuovi fiumi, nuovi torrenti di montagna. La trota &egrave; nel mirino &mdash; animale diffidente, nervoso, che vive in acque limpide dove ogni errore &egrave; visibile. Il bass nei laghi artificiali. E in lontananza, oltre l&rsquo;orizzonte: il mare. Gi&agrave; si parla di spinning in mare, di ricciole, di spigole, di barracuda. Il catalogo dei fallimenti futuri si arricchisce ogni mese. Con entusiasmo.</p></div>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div><span class="stat-num">~12</span><span class="stat-lbl">Anni di pesca sulla schiena</span></div>
+    <div><span class="stat-num">1+</span><span class="stat-lbl">Anno di pesca ai predatori</span></div>
+    <div><span class="stat-num">8+</span><span class="stat-lbl">Specie nel mirino</span></div>
+    <div><span class="stat-num">&infin;</span><span class="stat-lbl">Voglia di tornare</span></div>
+  </div>
+</div>
+
+<section class="section">
+  <p class="label">Il Bestiario</p>
+  <h2>Le prede che li sfidano</h2>
+  <p>Dal fossatello senza nome ai fiumi dei predatori, il catalogo delle specie inseguite da Jeremy e Wade si &egrave; fatto serio. Ogni pesce &egrave; una storia, ogni uscita un capitolo. Per ora, acqua dolce. Ma il mare aspetta.</p>
+  <div class="species-grid">
+    <div class="species-card"><span class="species-icon">🐊</span><span class="name">Luccio</span><span class="latin">Esox lucius</span></div>
+    <div class="species-card"><span class="species-icon">🐋</span><span class="name">Siluro</span><span class="latin">Silurus glanis</span></div>
+    <div class="species-card"><span class="species-icon">&#9889;</span><span class="name">Asp</span><span class="latin">Leuciscus aspius</span></div>
+    <div class="species-card"><span class="species-icon">&#128142;</span><span class="name">Trota</span><span class="latin">Salmo trutta</span></div>
+    <div class="species-card"><span class="species-icon">&#127919;</span><span class="name">Bass</span><span class="latin">Micropterus salmoides</span></div>
+    <div class="species-card"><span class="species-icon">&#128081;</span><span class="name">Persico Reale</span><span class="latin">Perca fluviatilis</span></div>
+    <div class="species-card"><span class="species-icon">🌊</span><span class="name">Spigola</span><span class="latin">Dicentrarchus labrax</span></div>
+    <div class="species-card"><span class="species-icon">&#9875;</span><span class="name">Ricciola</span><span class="latin">Seriola dumerili</span></div>
+    <div class="species-card"><span class="species-icon">&#128019;</span><span class="name">Barracuda</span><span class="latin">Sphyraena sphyraena</span></div>
+  </div>
+  <p style="margin-top:1.5rem;font-size:.88rem;color:var(--muted);font-style:italic;">* Le ultime tre specie sono nel piano futuro. Il mare aspetta. I pesci anche &mdash; per schivare.</p>
+</section>
+
+<section class="quote-section">
+  <div class="quote-inner">
+    <p class="label" style="margin-bottom:.8rem;">La Filosofia</p>
+    <p class="big-quote">Non &egrave; il pesce il punto. Il punto &egrave; che all&rsquo;alba, quando il mondo dorme ancora, noi siamo gi&agrave; l&igrave;. E questo, da solo, vale tutto.</p>
+    <p class="quote-attr">&mdash; Wade, su una riva anonima, ore 5:47 del mattino</p>
+  </div>
+</section>
+
+<section class="section">
+  <p class="label">L&rsquo;Epilogo Aperto</p>
+  <h2>La storia non &egrave; ancora finita</h2>
+  <p>Jeremy e Wade non sono ancora i pescatori che vogliono diventare. Ma la strada &egrave; chiara, gli attrezzi sono buoni, la testa &egrave; giusta. Hanno imparato pi&ugrave; in un anno di pesca seria che in dieci anni di spago e lombrico &mdash; e hanno imparato soprattutto che i predatori di acqua dolce non perdonano la superficialit&agrave;, la fretta, la noncuranza. Ti chiedono rispetto. Ti chiedono di studiare, di muoverti bene, di capire l&rsquo;acqua.</p>
+  <p>E loro stanno imparando. Uscita dopo uscita, tocco dopo tocco, mancata ferrata dopo mancata ferrata. C&rsquo;&egrave; ancora da fare. Ma la direzione &egrave; quella giusta.</p>
+  <p>Presto arriver&agrave; anche il mare. Nuove specie, nuove tecniche, nuova acqua salata negli occhi e nel naso. La ricciola non sa ancora cosa la aspetta. Anzi: la ricciola probabilmente se la caver&agrave; benissimo, come sempre. Ma l&rsquo;intenzione c&rsquo;&egrave;, e questo &egrave; gi&agrave; qualcosa.</p>
+  <p>La leggenda di Jeremy e Wade non &egrave; finita. Si sta solo scrivendo la parte migliore.</p>
+  <div class="divider">Continua&hellip;</div>
+  <p style="text-align:center;font-style:italic;color:var(--muted);">Segui St. Jeremy Wade. Prega per loro. E se li incontri al lago, offri un caff&egrave; &mdash; ne hanno bisogno.</p>
+</section>
+
+<footer>
+  <div class="logo">Jeremy <span>&amp;</span> Wade</div>
+  <p>Pescatori di Acqua Dolce &middot; Prossimamente anche di Mare</p>
+  <p style="margin-top:.6rem;font-size:.72rem;opacity:.6;">Nessun pesce &egrave; stato catturato nella realizzazione di questo sito. I pesci stanno benissimo.</p>
+</footer>
+
+<script>
+const s=document.getElementById('stars');
+for(let i=0;i<100;i++){const el=document.createElement('div');el.className='star';const sz=Math.random()*2.5+.5;el.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*90}%;left:${Math.random()*100}%;animation-delay:${Math.random()*5}s;animation-duration:${2+Math.random()*3}s;`;s.appendChild(el);}
+</script>
+</body>
+</html>
